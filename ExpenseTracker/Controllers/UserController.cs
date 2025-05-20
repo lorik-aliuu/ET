@@ -80,12 +80,23 @@ namespace ET.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDTO loginDto)
         {
-            var isAuthenticated = await _userService.IsAuthenticated(loginDto.Email, loginDto.Password);
-            if (!isAuthenticated)
-                return Unauthorized("Invalid email or password.");
+            
+            var user = await _userService.GetByEmailAsync(loginDto.Email);
+            if (user == null)
+            {
+                return Unauthorized(new { success = false, message = "Invalid email or password." });
+            }
 
-            return Ok("Login successful.");
+           
+            var isPasswordValid = await _userService.IsAuthenticated(loginDto.Email, loginDto.Password);
+            if (!isPasswordValid)
+            {
+                return Unauthorized(new { success = false, message = "Invalid email or password." });
+            }
+
+            return Ok(new { success = true, userId = user.Id });
         }
+
 
 
 

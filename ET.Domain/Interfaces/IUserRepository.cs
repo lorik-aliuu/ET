@@ -19,5 +19,8 @@ namespace ET.Domain.Interfaces
         Task<bool> DeleteUserAsync(int id);
 
         Task<User?> GetByEmailAsync(string email);
+
+       
+
     }
 }

@@ -8,6 +8,7 @@ using ET.Application.Interfaces;
 using ET.Application.Views;
 using ET.Domain.Entities;
 using ET.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ET.Application.Services
 {
@@ -85,5 +86,16 @@ namespace ET.Application.Services
 
             return _passwordService.VerifyPassword(user.PasswordHash, password);
         }
+
+        public async Task<UserDTO?> GetByEmailAsync(string email)
+        {
+            var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+            if (user == null)
+                return null;
+
+            var userDto = _mapper.Map<UserDTO>(user);
+            return userDto;
+        }
+
     }
 }

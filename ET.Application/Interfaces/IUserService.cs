@@ -15,7 +15,11 @@ namespace ET.Application.Interfaces
             Task<IEnumerable<UserDTO>> GetUsersAsync();
 
             Task<UserDTO> GetUserByIdAsync(int id);
-        
+
+            Task<UserDTO> GetByEmailAsync(string email);
+
+
+
         Task<UserDTO> UpdateUserAsync(int userId, UpdateUserDTO updateUserDto);
 
 
