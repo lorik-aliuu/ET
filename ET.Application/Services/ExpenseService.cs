@@ -21,7 +21,7 @@ namespace ET.Application.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
+            
         public async Task<ExpenseDTO> CreateExpenseAsync(int userId, int categoryId, CreateExpenseDTO expenseDto)
         {
             bool canAdd = await CanAddExpenseAsync(userId, categoryId, expenseDto.Amount);
