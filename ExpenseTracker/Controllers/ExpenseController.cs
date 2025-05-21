@@ -19,7 +19,7 @@ namespace ET.API.Controllers
         [HttpPost("{userId:int}/{categoryId:int}")]
         public async Task<IActionResult> CreateExpense(int userId, int categoryId, [FromBody] CreateExpenseDTO dto)
         {
-            // Check if the expense can be added without exceeding budgets
+           
             var canAdd = await _expenseService.CanAddExpenseAsync(userId, categoryId, dto.Amount);
             if (!canAdd)
             {
@@ -66,6 +66,21 @@ namespace ET.API.Controllers
                 return NotFound();
             return NoContent();
         }
+
+            [HttpGet("user/{userId:int}")]
+            public async Task<IActionResult> GetExpensesByUser(int userId)
+            {
+                var result = await _expenseService.GetExpensesByUserIdAsync(userId);
+                return Ok(result);
+            }
+
+        [HttpGet("category/{categoryId:int}")]
+        public async Task<IActionResult> GetExpensesByCategory(int categoryId)
+        {
+            var result = await _expenseService.GetExpensesByCategoryIdAsync(categoryId);
+            return Ok(result);
+        }
+
     }
 }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ET.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250518103529_tablecreated")]
-    partial class tablecreated
+    [Migration("20250521122807_createDatabase")]
+    partial class createDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,10 +49,15 @@ namespace ET.API.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("isActive")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Categories");
                 });
@@ -111,6 +116,9 @@ namespace ET.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -187,6 +195,17 @@ namespace ET.API.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ET.Domain.Entities.Category", b =>
+                {
+                    b.HasOne("ET.Domain.Entities.User", "User")
+                        .WithMany("Categories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ET.Domain.Entities.CategoryBudget", b =>
                 {
                     b.HasOne("ET.Domain.Entities.Category", "Category")
@@ -234,6 +253,8 @@ namespace ET.API.Migrations
 
             modelBuilder.Entity("ET.Domain.Entities.User", b =>
                 {
+                    b.Navigation("Categories");
+
                     b.Navigation("CategoryBudgets");
 
                     b.Navigation("Expenses");

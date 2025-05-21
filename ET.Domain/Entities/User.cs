@@ -17,6 +17,8 @@ namespace ET.Domain.Entities
 
         public string PasswordHash { get; set; }
 
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
+
         public ICollection<Expense> Expenses { get; set; } = new List<Expense>();
         public ICollection<CategoryBudget> CategoryBudgets { get; set; } = new List<CategoryBudget>();
     }

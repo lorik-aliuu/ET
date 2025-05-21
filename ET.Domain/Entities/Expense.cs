@@ -17,6 +17,8 @@ namespace ET.Domain.Entities
 
             public string? Notes { get; set; }
 
+            public DateTime Date { get; set; } = DateTime.UtcNow;
+
         public int UserId { get; set; }
         public int CategoryId { get; set; }
 

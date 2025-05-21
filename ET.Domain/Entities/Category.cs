@@ -11,6 +11,9 @@ namespace ET.Domain.Entities
         public string Name { get; set; }
         public string? Description { get; set; }
 
+        public int UserId { get; set; }
+        public User User { get; set; }
+
         public ICollection<Expense> Expenses { get; set; } = new List<Expense>();
         public ICollection<CategoryBudget> CategoryBudgets { get; set; } = new List<CategoryBudget>();
     }

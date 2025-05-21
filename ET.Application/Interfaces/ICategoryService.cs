@@ -14,6 +14,9 @@ namespace ET.Application.Interfaces
         Task<CategoryDTO?> GetCategoryByIdAsync(int id);
         Task<CategoryDTO> CreateCategoryAsync(CreateCategoryDTO category);
         Task<CategoryDTO> UpdateCategoryAsync(int id, UpdateCategoryDTO category);
+
+        Task<IEnumerable<CategoryDTO>> GetCategoriesByUserIdAsync(int userId);
+
         Task<bool> DeleteCategoryAsync(int id);
  
 

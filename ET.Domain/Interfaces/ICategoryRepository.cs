@@ -17,6 +17,9 @@ namespace ET.Domain.Interfaces
 
         Task<Category> UpdateCategoryAsync(Category category, CancellationToken ct = default);
 
+        Task<IEnumerable<Category>> GetCategoriesByUserIdAsync(int userId);
+
+
         Task<bool> DeleteCategoryAsync(int id);
     }
 }

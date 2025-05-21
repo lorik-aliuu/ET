@@ -58,6 +58,13 @@ namespace ET.API.Controllers
             return Ok(updated);
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetCategoriesByUser(int userId)
+        {
+            var categories = await _categoryService.GetCategoriesByUserIdAsync(userId);
+            return Ok(categories);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {

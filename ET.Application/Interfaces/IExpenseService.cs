@@ -15,6 +15,10 @@ namespace ET.Application.Interfaces
         Task<ExpenseDTO?> UpdateExpenseAsync(int id, UpdateExpenseDTO expenseDto);
         Task<bool> DeleteExpenseAsync(int id);
 
+        Task<IEnumerable<ExpenseDTO>> GetExpensesByUserIdAsync(int userId);
+
+        Task<IEnumerable<ExpenseDTO>> GetExpensesByCategoryIdAsync(int categoryId);
+
         Task<bool> CanAddExpenseAsync(int userId, int categoryId, decimal newAmount);
     }
 }

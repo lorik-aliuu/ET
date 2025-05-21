@@ -22,5 +22,10 @@ namespace ET.Domain.Interfaces
         Task<decimal> GetTotalExpensesForCategoryAsync(int userId, int categoryId, CancellationToken ct = default);
         Task<decimal> GetTotalExpensesForUserAsync(int userId, CancellationToken ct = default);
 
+        Task<IEnumerable<Expense>> GetExpensesByUserIdAsync(int userId);
+
+        Task<IEnumerable<Expense>> GetExpensesByCategoryIdAsync(int categoryId);
+
+
     }
 }

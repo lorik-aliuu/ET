@@ -45,6 +45,14 @@ namespace ET.Infrastructure.Repositories
             return existingCategory;
         }
 
+        public async Task<IEnumerable<Category>> GetCategoriesByUserIdAsync(int userId)
+        {
+            return await _context.Categories
+                .Where(c => c.UserId== userId)
+                .ToListAsync();
+        }
+
+
         public async Task<bool> DeleteCategoryAsync(int id)
         {
             var category = await _context.Categories.FindAsync(id);

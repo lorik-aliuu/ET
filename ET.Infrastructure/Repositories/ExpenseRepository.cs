@@ -72,5 +72,19 @@ namespace ET.Infrastructure.Repositories
                 .Where(e => e.UserId == userId)
                 .SumAsync(e => e.Amount ?? 0, ct);
         }
+
+        public async Task<IEnumerable<Expense>> GetExpensesByUserIdAsync(int userId)
+        {
+            return await _context.Expenses
+                .Where(e => e.UserId == userId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Expense>> GetExpensesByCategoryIdAsync(int categoryId)
+        {
+            return await _context.Expenses
+                                 .Where(e => e.CategoryId == categoryId)
+                                 .ToListAsync();
+        }
     }
 }

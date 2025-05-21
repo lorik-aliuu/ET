@@ -84,5 +84,24 @@ namespace ET.Application.Services
 
             return true;
         }
+
+       
+            public async Task<IEnumerable<ExpenseDTO>> GetExpensesByUserIdAsync(int userId)
+        {
+            var expenses = await _unitOfWork.ExpenseRepository.GetExpensesByUserIdAsync(userId);
+
+            // Use AutoMapper to map entities to DTOs
+            var expenseDtos = _mapper.Map<IEnumerable<ExpenseDTO>>(expenses);
+
+            return expenseDtos;
+        }
+
+        public async Task<IEnumerable<ExpenseDTO>> GetExpensesByCategoryIdAsync(int categoryId)
+        {
+            var expenses = await _unitOfWork.ExpenseRepository.GetExpensesByCategoryIdAsync(categoryId);
+            return _mapper.Map<IEnumerable<ExpenseDTO>>(expenses);
+        }
+
     }
+    
 }

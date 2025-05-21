@@ -53,6 +53,13 @@ namespace ET.Application.Services
             return _mapper.Map<CategoryDTO>(existingCategory);
         }
 
+        public async Task<IEnumerable<CategoryDTO>> GetCategoriesByUserIdAsync(int userId)
+        {
+            var categories = await _unitOfWork.CategoryRepository.GetCategoriesByUserIdAsync(userId);
+            return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+        }
+
+
         public async Task<bool> DeleteCategoryAsync(int id)
         {
             var deleted = await _unitOfWork.CategoryRepository.DeleteCategoryAsync(id);
